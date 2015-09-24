@@ -1,0 +1,95 @@
+.blog-view-controller {
+  background: $button-background-colour;
+  border-top: 1px solid $button-border-colour;
+  bottom: 0;
+  position: fixed;
+  right: 0;
+  text-align: center;
+  width: 100%;
+
+  @media screen and (min-width: $tablet) {
+    background: inherit;
+    border: 0;
+    margin: 10px;
+    min-width: 170px;
+    right: 10px;
+    width: auto;
+  }
+}
+
+%blog-view__button {
+  background: $button-background-colour;
+  border: 0;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 50%;
+
+  @media screen and (min-width: $tablet) {
+    border-radius: 6px;
+    margin: 10px;
+    width: 150px;
+  }
+}
+
+.blog-view__button {
+  @extend %blog-view__button;
+}
+
+.blog-view__button--save {
+  @extend %blog-view__button;
+  background: $button-save-background-colour;
+}
+
+.blog-view__button--cancel {
+  @extend %blog-view__button;
+  background: $button-cancel-background-colour;
+  color: $font-white;
+}
+
+%blog-name {
+  font-size: $font-lg;
+  font-weight: bold;
+  margin: 0;
+  padding: 10px 0;
+}
+
+%blog-desc {
+  font-size: $font-md;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.blog-name,
+.blog-name-input {
+  @extend %blog-name;
+}
+
+.blog-desc,
+.blog-desc-input {
+  @extend %blog-desc;
+  resize: none;
+}
+
+.blog-name-input,
+.blog-desc-input {
+  background-color: inherit;
+  border: 0;
+  box-sizing: border-box;
+  font-family: inherit;
+  width: 100%;
+}
+
+.blog-delete {
+  padding: 10px 0;
+  text-align: center;
+  width: 100%;
+
+  .blog-delete__button {
+    background: $button-cancel-background-colour;
+    border-radius: 5px;
+    color: $font-white;
+    font-family: inherit;
+    font-size: $font-md;
+    padding: 10px 40px;
+  }
+}

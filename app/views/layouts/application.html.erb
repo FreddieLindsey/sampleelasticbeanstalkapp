@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Funding Source</title>
+  <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/assets/app.css">
+  <script src="/assets/app.js"></script>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<% props = {
+  siteName: ENV['APPLICATION_NAME'],
+  links: [
+    { title: 'Home', url: '/' }
+  ]
+} %>
+<% blog_links.each do |link|; props[:links] << link; end %>
+<% user_signin_links.each do |link|; props[:links] << link; end %>
+<%= react_component('Header', props, 'header') %>
+<div class="site-content">
+  <%= yield %>
+</div>
+
+</body>
+</html>

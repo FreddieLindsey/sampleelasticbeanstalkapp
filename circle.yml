@@ -1,0 +1,24 @@
+checkout:
+  post:
+    - cp config/database.yml config/database.yml.orig
+
+dependencies:
+  pre:
+    - pip install awscli
+
+test:
+  post:
+    - mv config/database.yml.orig config/database.yml
+    - mkdir -p $CIRCLE_ARTIFACTS/$CIRCLE_SHA1; cp public/assets/{app.js,app.css} $CIRCLE_ARTIFACTS/$CIRCLE_SHA1/
+    - rm -rf public/assets
+    - zip -r $CIRCLE_ARTIFACTS/$CIRCLE_SHA1.zip app bin config db lib public config.ru Gemfile Gemfile.lock Rakefile
+
+deployment:
+  prod:
+    branch: master
+    commands:
+      - aws s3 cp $CIRCLE_ARTIFACTS/$CIRCLE_SHA1.zip s3://$APPLICATION_NAME/app/$CIRCLE_SHA1.zip
+      - aws s3 cp $CIRCLE_ARTIFACTS/$CIRCLE_SHA1/app.js s3://$APPLICATION_NAME/assets/app.js
+      - aws s3 cp $CIRCLE_ARTIFACTS/$CIRCLE_SHA1/app.css s3://$APPLICATION_NAME/assets/app.css
+      - aws elasticbeanstalk create-application-version --application-name $APPLICATION_NAME --version-label $CIRCLE_SHA1 --source-bundle S3Bucket=$APPLICATION_NAME,S3Key=app/$CIRCLE_SHA1.zip --region eu-west-1
+      - aws elasticbeanstalk update-environment --environment-name $APPLICATION_NAME --version-label $CIRCLE_SHA1 --region eu-west-1

@@ -1,0 +1,56 @@
+body {
+  background: $background-colour;
+  font-family: $font-stack;
+  font-size: $font-md;
+  margin: 0;
+  padding: 0;
+}
+
+.site-header {
+  box-sizing: border-box;
+  display: inline-block;
+  left: 0;
+  letter-spacing: 3px;
+  position: fixed;
+  text-transform: uppercase;
+  top: 0;
+  width: 100%;
+
+  @media screen and (min-width: $tablet) {
+    height: 100%;
+    width: 30%;
+  }
+}
+
+.site-content {
+  box-sizing: border-box;
+  padding: 50px 20px 0;
+  width: 100%;
+
+  @media screen and (min-width: $tablet) {
+    padding: 0 20px 0 30%;
+  }
+}
+
+a,
+a:active,
+a:focus,
+a:hover,
+a:visited {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: inherit;
+}
+
+button {
+  background: inherit;
+  border: inherit;
+}
+
+hr {
+  border: 1px solid darken($button-border-colour, 20%);
+}
+
+* {
+  outline: none;
+}
